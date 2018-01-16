@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecjtu.bbm.orm.mapper.UserMapper">
+
+    <resultMap id="result" type="com.ecjtu.bbm.orm.domain.User">
+        <id property="uuid" column="UUID"/>
+        <result property="account" column="ACCOUNT"/>
+        <result property="nickName" column="NICKNAME"/>
+        <result property="icon" column="ICON"/>
+        <result property="gender" column="GENDER"/>
+        <result property="mail" column="MAIL"/>
+        <result property="authority" column="AUTHORITY"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="lastLoginTime" column="LAST_LOGIN_TIME"/>
+        <result property="operator" column="OPERATOR"/>
+    </resultMap>
+
+    <sql id="columns">
+        UUID,ACCOUNT,NICKNAME,ICON,GENDER,MAIL,AUTHORITY,CREATE_TIME,UPDATE_TIME,LAST_LOGIN_TIME,OPERATOR
+    </sql>
+
+    <sql id="dynamicWhere">
+        <where>
+            <if test="@Ognl@isNotEmpty(account)">AND ACCOUNT LIKE '%${account}%'</if>
+            <if test="@Ognl@isNotEmpty(nickName)">AND NICKNAME LIKE '%${nickName}%'</if>
+            <if test="@Ognl@isNotEmpty(gender)">AND GENDER LIKE '%${gender}%'</if>
+            <if test="@Ognl@isNotEmpty(mail)">AND MAIL LIKE '%${mail}%'</if>
+        </where>
+    </sql>
+
+    <!--查询：查询所有符合条件的记录-->
+    <select id="findList" parameterType="com.ecjtu.bbm.orm.domain.User" resultMap="result">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            T_BBM_USER_INFO
+        <include refid="dynamicWhere"/>
+    </select>
+
+    <select id="findOne" resultMap="result" parameterType="java.lang.String">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            T_BBM_USER_INFO
+        WHERE
+            UUID = #{uuid}
+    </select>
+
+    <insert id="save" parameterType="com.ecjtu.bbm.orm.domain.User">
+        INSERT INTO T_BBM_USER_INFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                UUID,
+            </if>
+            <if test="account != null">
+                ACCOUNT,
+            </if>
+            <if test="nickName != null">
+                NICKNAME,
+            </if>
+            <if test="icon != null">
+                ICON,
+            </if>
+            <if test="gender != null">
+                GENDER,
+            </if>
+            <if test="mail != null">
+                MAIL,
+            </if>
+            <if test="authority != null">
+                AUTHORITY,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME,
+            </if>
+            <if test="lastLoginTime != null">
+                LAST_LOGIN_TIME,
+            </if>
+            <if test="operator != null">
+                OPERATOR,
+            </if>
+
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="mail != null">
+                    #{mail,jdbcType=VARCHAR},
+            </if>
+            <if test="authority != null">
+                #{authority,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=java.sql.Timestamp},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=java.sql.Timestamp},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime,jdbcType=java.sql.Timestamp},
+            </if>
+            <if test="operator != null">
+                #{operator,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

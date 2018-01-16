@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bbm.iml" filepath="$PROJECT_DIR$/.idea/modules/bbm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bbm_main.iml" filepath="$PROJECT_DIR$/.idea/modules/bbm_main.iml" group="bbm" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bbm_test.iml" filepath="$PROJECT_DIR$/.idea/modules/bbm_test.iml" group="bbm" />
+    </modules>
+  </component>
+</project>
