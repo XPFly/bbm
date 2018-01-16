@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -81,5 +82,15 @@ public class UserController {
         User user = userServiceImpl.findOne(uuid);
         model.addAttribute("user",user);
         return "bbm/user/userDetail";
+    }
+
+    /**
+     * 删除单个用户
+     *
+     * @param uuid  UUID
+     */
+    @RequestMapping(value = "/delete")
+    public void delete(@RequestParam("uuid") String uuid){
+        userServiceImpl.delete(uuid);
     }
 }

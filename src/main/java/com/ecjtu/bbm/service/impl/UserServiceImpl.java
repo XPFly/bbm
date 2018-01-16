@@ -42,4 +42,14 @@ public class UserServiceImpl implements UserService{
         user.setCreateTime(new Date());
         userMapper.save(user);
     }
+
+    @Override
+    public void delete(String uuid) {
+        userMapper.delete(uuid);
+    }
+
+    @Override
+    public void deleteByBatch(List<String> deleteIds) {
+        userMapper.deleteByBatch(deleteIds);
+    }
 }

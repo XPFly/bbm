@@ -126,4 +126,20 @@
         </trim>
     </insert>
 
+    <!--删除：删除单条记录-->
+    <delete id="delete" parameterType="String" >
+        DELETE
+            T_BBM_USER_INFO
+        WHERE
+            UUID = #{uuid}
+    </delete>
+
+    <!--删除：批量删除-->
+    <delete id="deleteByBatch">
+        DELETE FROM T_BBM_USER_INFO UUID IN
+        <foreach collection="list" item="deleteIds" open="(" separator="," close=")">
+            #{deleteIds}
+        </foreach>
+    </delete>
+
 </mapper>

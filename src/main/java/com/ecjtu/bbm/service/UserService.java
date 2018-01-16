@@ -32,4 +32,18 @@ public interface UserService {
      * @param user  User
      */
     void save(User user);
+
+    /**
+     * 删除：删除单条记录
+     *
+     * @param uuid  UUID
+     */
+    void delete(String uuid);
+
+    /**
+     * 删除：批量删除
+     *
+     * @param deleteIds 需删除的记录的UUID的集合
+     */
+    void deleteByBatch(List<String> deleteIds);
 }

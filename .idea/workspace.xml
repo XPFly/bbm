@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d05dcfce-03cd-4dca-a5c3-66e9a84da4fb" name="Default" comment="" />
+    <list default="true" id="d05dcfce-03cd-4dca-a5c3-66e9a84da4fb" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/controller/UserController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/orm/mapper/UserMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/orm/mapper/UserMapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/service/UserService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/service/impl/UserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/service/impl/UserServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/ecjtu/bbm/orm/mapper/UserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/com/ecjtu/bbm/orm/mapper/UserMapper.xml" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -19,13 +25,76 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="StartApp.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StartApp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/StartApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+            <state relative-caret-position="351">
+              <caret line="13" column="23" lean-forward="false" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/com/ecjtu/bbm/orm/mapper/UserMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="136" column="15" lean-forward="false" selection-start-line="136" selection-start-column="8" selection-end-line="136" selection-end-column="15" />
+              <folding>
+                <element signature="n#select#1;n#mapper#0;n#!!top" expanded="false" />
+                <element signature="n#insert#0;n#mapper#0;n#!!top" expanded="false" />
+                <marker date="1516068248828" expanded="true" signature="1570:1656" ph="SELECT FROM T_BBM_USER_INFO" />
+                <marker date="1516068248828" expanded="true" signature="1798:1925" ph="SELECT FROM T_BBM_USER_INFO" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/orm/mapper/UserMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="26">
+              <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/service/UserService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="40" column="24" lean-forward="true" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/service/impl/UserServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
+              <folding>
+                <element signature="e#1209#1210#0" expanded="true" />
+                <element signature="e#1248#1249#0" expanded="true" />
+                <element signature="e#1319#1320#0" expanded="true" />
+                <element signature="e#1370#1371#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/controller/UserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="404">
+              <caret line="93" column="37" lean-forward="true" selection-start-line="93" selection-start-column="37" selection-end-line="93" selection-end-column="37" />
+              <folding>
+                <element signature="e#2548#2549#0" expanded="true" />
+                <element signature="e#2592#2593#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -352,6 +421,11 @@
       <list>
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/StartApp.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/com/ecjtu/bbm/orm/mapper/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/orm/mapper/UserMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/service/impl/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/controller/UserController.java" />
       </list>
     </option>
   </component>
@@ -361,7 +435,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="733" />
     <option name="width" value="1260" />
     <option name="height" value="1098" />
@@ -447,6 +521,17 @@
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="ecjtu" type="462c0819:PsiDirectoryNode" />
               <item name="bbm" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bbm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bbm" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ecjtu" type="462c0819:PsiDirectoryNode" />
+              <item name="bbm" type="462c0819:PsiDirectoryNode" />
               <item name="orm" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -459,7 +544,42 @@
               <item name="ecjtu" type="462c0819:PsiDirectoryNode" />
               <item name="bbm" type="462c0819:PsiDirectoryNode" />
               <item name="orm" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bbm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bbm" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ecjtu" type="462c0819:PsiDirectoryNode" />
+              <item name="bbm" type="462c0819:PsiDirectoryNode" />
+              <item name="orm" type="462c0819:PsiDirectoryNode" />
               <item name="po" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bbm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bbm" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ecjtu" type="462c0819:PsiDirectoryNode" />
+              <item name="bbm" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bbm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bbm" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="ecjtu" type="462c0819:PsiDirectoryNode" />
+              <item name="bbm" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bbm" type="b2602c69:ProjectViewProjectNode" />
@@ -538,6 +658,7 @@
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="E:/projectfile/vbill/doing/idea/obm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -676,15 +797,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516067072664</updated>
-      <workItem from="1516067078867" duration="473000" />
+      <workItem from="1516067078867" duration="2058000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="473000" />
+    <option name="totallyTimeSpent" value="2058000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1098" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -756,17 +877,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/ecjtu/bbm/orm/mapper/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1516012126972" expanded="true" signature="1570:1656" ph="SELECT FROM T_BBM_USER_INFO" />
-            <marker date="1516012126972" expanded="true" signature="1798:1925" ph="SELECT FROM T_BBM_USER_INFO" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/fancy/helpers/fancybox_buttons.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -782,10 +892,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/StartApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+        <state relative-caret-position="351">
+          <caret line="13" column="23" lean-forward="false" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com/ecjtu/bbm/orm/mapper/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="136" column="15" lean-forward="false" selection-start-line="136" selection-start-column="8" selection-end-line="136" selection-end-column="15" />
+          <folding>
+            <element signature="n#select#1;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#insert#0;n#mapper#0;n#!!top" expanded="false" />
+            <marker date="1516068248828" expanded="true" signature="1570:1656" ph="SELECT FROM T_BBM_USER_INFO" />
+            <marker date="1516068248828" expanded="true" signature="1798:1925" ph="SELECT FROM T_BBM_USER_INFO" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/orm/mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="40" column="24" lean-forward="true" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
+          <folding>
+            <element signature="e#1209#1210#0" expanded="true" />
+            <element signature="e#1248#1249#0" expanded="true" />
+            <element signature="e#1319#1320#0" expanded="true" />
+            <element signature="e#1370#1371#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ecjtu/bbm/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="93" column="37" lean-forward="true" selection-start-line="93" selection-start-column="37" selection-end-line="93" selection-end-column="37" />
+          <folding>
+            <element signature="e#2548#2549#0" expanded="true" />
+            <element signature="e#2592#2593#0" expanded="true" />
           </folding>
         </state>
       </provider>
