@@ -33,7 +33,6 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     // junit
-    testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     // jsp
@@ -52,4 +51,11 @@ dependencies {
 
     // log
     testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+
+    // poi excel
+    compile 'org.apache.poi:poi:3.10-FINAL'
+    compile 'org.apache.poi:poi-ooxml:3.10-FINAL'
+    compile 'org.apache.poi:poi-ooxml-schemas:3.10-FINAL'
+    compile 'org.apache.poi:poi-excelant:3.10-FINAL'
+    compile 'org.apache.poi:poi-scratchpad:3.10-FINAL'
 }

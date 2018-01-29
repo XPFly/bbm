@@ -117,8 +117,7 @@
                                                 <div style="text-align: center;">
                                                     <button class="btn btn-info btn-sm" type="button"
                                                             onclick="javascript:parent.$.fancybox.close();">
-															<span
-                                                                    class="ace-icon fa fa-close icon-on-right bigger-110"></span>
+															<span class="ace-icon fa fa-close icon-on-right bigger-110"></span>
                                                         关闭
                                                     </button>
                                                 </div>
