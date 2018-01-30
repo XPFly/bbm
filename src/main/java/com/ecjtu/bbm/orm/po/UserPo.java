@@ -54,6 +54,10 @@ public class UserPo implements Serializable {
      * OPERATOR：操作人
      */
     private String operator;
+    /**
+     * 排序方式：升序 or 降序
+     */
+    private String orderByType;
 
     public String getUuid() {
         return uuid;
@@ -141,6 +145,14 @@ public class UserPo implements Serializable {
 
     public void setOperator(String operator) {
         this.operator = operator;
+    }
+
+    public String getOrderByType() {
+        return orderByType;
+    }
+
+    public void setOrderByType(String orderByType) {
+        this.orderByType = orderByType;
     }
 
     @Override

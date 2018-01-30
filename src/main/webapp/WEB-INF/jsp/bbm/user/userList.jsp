@@ -58,6 +58,17 @@
                                                         <input type="text" name="age" value="${user.nickName}" class="form-control input-small width-200px" data-placement="bottom" title=""  id="form-field-6">
                                                     </div>
                                                 </div>
+                                                <div class="form-group form-group-sm width-300px">
+                                                    <label for="form-field-6" class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">排序方式:</label>
+                                                    <div class="col-sm-8  no-padding">
+                                                        <select data-placeholder="请选择" name="orderByType" class="form-control width-200px">
+                                                            <option value="0"
+                                                                    <c:if test="${user.orderByType=='0'}">selected</c:if>>创建时间 降序</option>
+                                                            <option value="1"
+                                                                    <c:if test="${user.orderByType=='1'}">selected</c:if>>创建时间 升序</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <button class="btn btn-normal btn-sm" type="submit">

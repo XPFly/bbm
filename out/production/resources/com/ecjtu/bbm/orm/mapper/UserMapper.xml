@@ -36,6 +36,8 @@
         FROM
             T_BBM_USER_INFO
         <include refid="dynamicWhere"/>
+        <if test='orderByType=="0"'> ORDER BY CREATE_TIME DESC</if>
+        <if test='orderByType=="1"'> ORDER BY CREATE_TIME ASC</if>
     </select>
 
     <select id="findOne" resultMap="result" parameterType="java.lang.String">

@@ -2,6 +2,7 @@ package com.ecjtu.bbm.controller;
 
 import com.ecjtu.bbm.orm.domain.User;
 import com.ecjtu.bbm.service.impl.UserServiceImpl;
+import com.github.pagehelper.PageHelper;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -52,6 +53,7 @@ public class UserController {
         if (REQUEST_METHOD.equals(request.getMethod())){
             model.addAttribute("userList","").addAttribute("user",user);
         }else {
+            PageHelper.startPage(1,5);
             List<User> userList = userServiceImpl.findList(user);
             model.addAttribute("userList", userList).addAttribute("user", user);
         }
