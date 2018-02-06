@@ -14,12 +14,12 @@
         pages = parseInt(Math.ceil(total/${pageInfo.pageSize}));
     }
 
-    var max                             = ${pageInfo.pageSize};
+    var max = ${pageInfo.pageSize};
     var offset = ${pageInfo.pageNum -1}*max;
     var maxsteps = 5;
 
-    if (!offset) offset = 0; // "${offset}"?${offset}: 0;
-    if (!max) max = 100; //"${max}"?${offset}: 10
+    if (!offset) offset = 0;
+    if (!max) max = 100;
 
     var linkParams = [];
 

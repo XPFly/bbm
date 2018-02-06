@@ -1,6 +1,8 @@
 package com.ecjtu.bbm.controller;
 
+import com.ecjtu.bbm.common.AbstractController;
 import com.ecjtu.bbm.common.utils.ExcelUtils;
+import com.ecjtu.bbm.common.utils.RequestHelper;
 import com.ecjtu.bbm.orm.domain.User;
 import com.ecjtu.bbm.service.impl.UserServiceImpl;
 import com.github.pagehelper.PageHelper;
@@ -35,7 +37,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/bbm/user")
-public class UserController {
+public class UserController extends AbstractController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     private static final String REQUEST_METHOD = "GET";
@@ -57,7 +59,7 @@ public class UserController {
             model.addAttribute("userList","").addAttribute("user",user);
         }else {
             Integer count = userServiceImpl.count(user);
-            PageHelper.startPage(1,5);
+            PageHelper.startPage(RequestHelper.getParamValue("pageNum",PAGE_NUM,request),RequestHelper.getParamValue("pageSize",PAGE_SIZE,request));
             List<User> userList = userServiceImpl.findList(user);
             PageInfo<User> pageInfo = new PageInfo<>(userList,5);
             model.addAttribute("userList", userList).addAttribute("pageInfo", pageInfo).addAttribute("user", user).addAttribute("count", count);
@@ -138,110 +140,6 @@ public class UserController {
      * @param user      User
      * @param response  HttpServletResponse
      */
-    @RequestMapping("/excelExport1")
-    public void createUserExcelToDisk(User user, HttpServletResponse response){
-        // 数据库中查询数据
-        List<User> userList = userServiceImpl.findList(user);
-
-        // 第一步：创建一个webbook(工作簿)，对应一个Excel文件
-        SXSSFWorkbook sxssfWorkbook = new SXSSFWorkbook(1000);
-        // 第二步：在webbook中添加一个sheet(表格)，对应Excel文件的sheet，表格名：用户表
-        Sheet sheet = sxssfWorkbook.createSheet("用户信息表");
-        // 第三步：在sheet中添加表头第0行（注意老版本poi对Excel的行数列数有限制）
-        Row row = sheet.createRow(0);
-        sheet.createFreezePane(0,1,0,1);
-        // 第四步：创建单元格，并设置值表头以及表头居中
-        CellStyle cellStyle = sxssfWorkbook.createCellStyle();
-        cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
-
-        // 表头内容
-        String[] headers = {"账号","昵称","性别","邮箱","权限","创建时间","更新时间","最近登录的时间"};
-        for (int i = 0; i < headers.length; i++) {
-            Cell cell = row.createCell(i);
-            cell.setCellValue(headers[i]);
-            cell.setCellStyle(cellStyle);
-            sheet.setColumnWidth(i,10*2*256);
-        }
-
-        // 第五步：写入实体数据（实际应用中这些数据从数据库中得到）
-        for (int i = 0; i < userList.size(); i++) {
-            row = sheet.createRow(i+1);
-
-            User userRow = userList.get(i);
-            // 第六步：创建单元格，并设置值
-            // 账号
-            row.createCell(0).setCellValue(userRow.getAccount());
-            // 昵称
-            row.createCell(1).setCellValue(userRow.getNickName());
-            // 性别
-            if (!StringUtils.isEmpty(userRow.getGender())){
-                switch (userRow.getGender()){
-                    case "0":
-                        row.createCell(2).setCellValue("男");
-                        break;
-                    case "1":
-                        row.createCell(2).setCellValue("女");
-                        break;
-                    default:
-                        row.createCell(2).setCellValue("");
-                        break;
-                }
-            }
-            // 邮箱
-            row.createCell(3).setCellValue(userRow.getMail());
-            // 权限
-            if (!StringUtils.isEmpty(userRow.getAuthority())){
-                switch (userRow.getAuthority()){
-                    case "0":
-                        row.createCell(4).setCellValue("管理员");
-                        break;
-                    case "1":
-                        row.createCell(4).setCellValue("普通用户");
-                        break;
-                    default:
-                        row.createCell(4).setCellValue("");
-                        break;
-                }
-            }
-
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            // 创建时间
-            row.createCell(5).setCellValue(simpleDateFormat.format(userRow.getCreateTime()));
-            // 更新时间
-            if (userRow.getUpdateTime() != null){
-                row.createCell(6).setCellValue(simpleDateFormat.format(userRow.getUpdateTime()));
-            }else {
-                row.createCell(6).setCellValue("");
-            }
-            // 最近登录的时间
-            if (userRow.getLastLoginTime() != null){
-                row.createCell(7).setCellValue(simpleDateFormat.format(userRow.getLastLoginTime()));
-            }else {
-                row.createCell(7).setCellValue("");
-            }
-        }
-
-        // 第七步：将文件存在指定位置
-        OutputStream outputStream = null;
-        try {
-            response.addHeader("Content-Disposition","attachment;filename="+new String("用户信息表".getBytes(),"iso8859-1")+".xlsx");
-            outputStream = new BufferedOutputStream(response.getOutputStream());
-            response.setContentType("application/octet-stream");
-            sxssfWorkbook.write(outputStream);
-        }catch (Exception e){
-            LOGGER.error("=====导出Excel异常=====",e);
-        }finally {
-            if (outputStream != null){
-                try {
-                    outputStream.flush();
-                    outputStream.close();
-                }catch (IOException e){
-                    LOGGER.error(e.getMessage(),e);
-                }
-            }
-        }
-    }
-
     @RequestMapping(value = "/excelExport")
     public void excel(User user,HttpServletResponse response){
         // 设置表名
@@ -259,6 +157,7 @@ public class UserController {
 
         ExcelUtils excelUtils = new ExcelUtils(fileName, fieldNameList);
 
+        // 赋值
         ArrayList<ArrayList<String>> dataList = new ArrayList<>();
         List<User> userList = userServiceImpl.findList(user);
         for (User userRow : userList) {
