@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public Integer count(User user) {
+        return userMapper.count(user);
+    }
+
+    @Override
     public void save(User user) {
         user.setUuid(UUID.randomUUID().toString().replace("-",""));
         LOGGER.info("UUID:[{}]",UUID.randomUUID().toString());

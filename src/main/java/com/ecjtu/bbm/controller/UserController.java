@@ -1,8 +1,10 @@
 package com.ecjtu.bbm.controller;
 
+import com.ecjtu.bbm.common.utils.ExcelUtils;
 import com.ecjtu.bbm.orm.domain.User;
 import com.ecjtu.bbm.service.impl.UserServiceImpl;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -23,6 +25,7 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,9 +56,11 @@ public class UserController {
         if (REQUEST_METHOD.equals(request.getMethod())){
             model.addAttribute("userList","").addAttribute("user",user);
         }else {
+            Integer count = userServiceImpl.count(user);
             PageHelper.startPage(1,5);
             List<User> userList = userServiceImpl.findList(user);
-            model.addAttribute("userList", userList).addAttribute("user", user);
+            PageInfo<User> pageInfo = new PageInfo<>(userList,5);
+            model.addAttribute("userList", userList).addAttribute("pageInfo", pageInfo).addAttribute("user", user).addAttribute("count", count);
         }
         return "/bbm/user/userList";
     }
@@ -122,8 +127,9 @@ public class UserController {
      * @param uuid  UUID
      */
     @RequestMapping(value = "/delete")
-    public void delete(@RequestParam("uuid") String uuid){
+    public void delete(@RequestParam("uuid") String uuid,Model model){
         userServiceImpl.delete(uuid);
+        model.addAttribute("message","删除成功");
     }
 
     /**
@@ -132,7 +138,7 @@ public class UserController {
      * @param user      User
      * @param response  HttpServletResponse
      */
-    @RequestMapping("/excelExport")
+    @RequestMapping("/excelExport1")
     public void createUserExcelToDisk(User user, HttpServletResponse response){
         // 数据库中查询数据
         List<User> userList = userServiceImpl.findList(user);
@@ -234,5 +240,68 @@ public class UserController {
                 }
             }
         }
+    }
+
+    @RequestMapping(value = "/excelExport")
+    public void excel(User user,HttpServletResponse response){
+        // 设置表名
+        String fileName = "用户信息表";
+        // 设置表格表头
+        ArrayList<String> fieldNameList = new ArrayList<>();
+        fieldNameList.add("账号");
+        fieldNameList.add("昵称");
+        fieldNameList.add("性别");
+        fieldNameList.add("邮箱");
+        fieldNameList.add("权限");
+        fieldNameList.add("创建时间");
+        fieldNameList.add("更新时间");
+        fieldNameList.add("最近登录的时间");
+
+        ExcelUtils excelUtils = new ExcelUtils(fileName, fieldNameList);
+
+        ArrayList<ArrayList<String>> dataList = new ArrayList<>();
+        List<User> userList = userServiceImpl.findList(user);
+        for (User userRow : userList) {
+            ArrayList<String> temp = new ArrayList<>();
+            temp.add(userRow.getAccount());
+            temp.add(userRow.getNickName());
+            switch (userRow.getGender()){
+                case "0":
+                    temp.add("男");
+                    break;
+                case "1":
+                    temp.add("女");
+                    break;
+                default:
+                    temp.add("");
+                    break;
+            }
+            temp.add(userRow.getMail());
+            switch (userRow.getAuthority()){
+                case "0":
+                    temp.add("管理员");
+                    break;
+                case "1":
+                    temp.add("普通用户");
+                    break;
+                default:
+                    temp.add("");
+                    break;
+            }
+            temp.add(ExcelUtils.formatDate(userRow.getCreateTime()));
+            if (userRow.getUpdateTime() != null){
+                temp.add(ExcelUtils.formatDate(userRow.getUpdateTime()));
+            }else {
+                temp.add("");
+            }
+            if (userRow.getLastLoginTime() != null){
+                temp.add(ExcelUtils.formatDate(userRow.getLastLoginTime()));
+            }else {
+                temp.add("");
+            }
+            dataList.add(temp);
+        }
+        excelUtils.insertDataToExcel(1,dataList);
+        excelUtils.downloadExcel(excelUtils,fileName,response);
     }
 }

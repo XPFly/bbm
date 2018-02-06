@@ -30,7 +30,7 @@
     </sql>
 
     <!--查询：查询所有符合条件的记录-->
-    <select id="findList" parameterType="com.ecjtu.bbm.orm.domain.User" resultMap="result">
+    <select id="findList" resultMap="result" parameterType="com.ecjtu.bbm.orm.domain.User">
         SELECT
             <include refid="columns"/>
         FROM
@@ -47,6 +47,13 @@
             T_BBM_USER_INFO
         WHERE
             UUID = #{uuid}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer" parameterType="com.ecjtu.bbm.orm.domain.User">
+        SELECT
+            COUNT(1)
+        FROM T_BBM_USER_INFO
+        <include refid="dynamicWhere"/>
     </select>
 
     <insert id="save" parameterType="com.ecjtu.bbm.orm.domain.User">

@@ -27,6 +27,14 @@ public interface UserMapper {
     User findOne(String uuid);
 
     /**
+     * 查询符合条件的记录数
+     *
+     * @param user  User
+     * @return      Integer
+     */
+    Integer count(User user);
+
+    /**
      * 插入
      *
      * @param user  User

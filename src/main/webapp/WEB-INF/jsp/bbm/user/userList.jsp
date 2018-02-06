@@ -22,6 +22,9 @@
 
 </head>
 <body class="no-skin ">
+===========<br>
+${pageInfo}<br>
+-----------
 <div class="main-container" id="main-container">
     <div class="main-content ">
         <div class="main-content-inner ">
@@ -42,20 +45,37 @@
                                     <div class="widget-main ">
                                         <form class="form-inline form-horizontal" action="${ctx}/bbm/user/list?entry=1"
                                               id="searchForm" method="post">
-                                            <%--<input type="hidden" name="pageNum" value="${pageInfo.getPageNum()}"/>--%>
-                                            <%--<input type="hidden" name="pageSize" value="${pageInfo.getPageSize()}">--%>
+                                            <input type="hidden" name="pageNum" value="${pageInfo.pageNum}"/>
+                                            <input type="hidden" name="pageSize" value="${pageInfo.pageSize}">
                                             <div class="col-xs-12">
-
                                                 <div class="form-group form-group-sm width-300px">
                                                     <label for="form-field-6" class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">账号:</label>
                                                     <div class="col-sm-8  no-padding"  >
-                                                        <input type="text" name="name" value="${user.account}" class="form-control input-small width-200px" data-placement="bottom" title=""  id="form-field-6">
+                                                        <input type="text" name="account" value="${user.account}" class="form-control input-small width-200px" data-placement="bottom" title=""  id="form-field-6">
                                                     </div>
                                                 </div>
                                                 <div class="form-group form-group-sm width-300px">
                                                     <label for="form-field-6" class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">昵称:</label>
                                                     <div class="col-sm-8  no-padding"  >
-                                                        <input type="text" name="age" value="${user.nickName}" class="form-control input-small width-200px" data-placement="bottom" title=""  id="form-field-6">
+                                                        <input type="text" name="nickName" value="${user.nickName}" class="form-control input-small width-200px" data-placement="bottom" title=""  id="form-field-6">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-group-sm width-300px">
+                                                    <label for="form-field-6" class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">性别:</label>
+                                                    <div class="col-sm-8  no-padding"  >
+                                                        <select data-placeholder="请选择" name="gender" class="form-control width-200px">
+                                                            <option value="">全部</option>
+                                                            <option value="0"
+                                                                    <c:if test="${user.gender=='0'}">selected</c:if>>男</option>
+                                                            <option value="1"
+                                                                    <c:if test="${user.gender=='1'}">selected</c:if>>女</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-group-sm width-300px">
+                                                    <label for="form-field-6" class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">邮箱:</label>
+                                                    <div class="col-sm-8  no-padding"  >
+                                                        <input type="text" name="mail" value="${user.mail}" class="form-control input-small width-200px" data-placement="bottom" title=""  id="form-field-6">
                                                     </div>
                                                 </div>
                                                 <div class="form-group form-group-sm width-300px">
@@ -100,13 +120,13 @@
                                 </div>
                             </div>
                         </div>
-                        <%--<div id="td" style="display: none">
+                        <div id="countPage" style="display: none">
                             总条数：
                             <c:choose>
-                                <c:when test="${countAll eq 0 || empty countAll}">0</c:when>
-                                <c:otherwise>${countAll}</c:otherwise>
+                                <c:when test="${count eq 0 || empty count}">0</c:when>
+                                <c:otherwise>${count}</c:otherwise>
                             </c:choose>
-                        </div>--%>
+                        </div>
 
                         <div class="widget-box widget-color-normal2" style="opacity: 1;">
                             <div class="widget-header">
@@ -187,9 +207,9 @@
                         <div class="col-sm-4 hidden-480 left">
                             <label class="dataTables_info " id="dynamic-table_info" role="status" aria-live="polite"></label>
                         </div>
-                        <%--<div class="col-sm-8 right">
-                            <%@include file="pagination.jsp"%>
-                        </div>--%>
+                        <div class="col-sm-8 right">
+                            <%@include file="../../layout/pagination.jsp"%>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -246,10 +266,12 @@
     });
 
     function del(uuid){
-        var url="${ctx}/demo/user/delete?uuid="+uuid;
-        confirm("确认删除吗？").on(function(e){
+        var url="${ctx}/bbm/user/delete?uuid="+uuid;
+        Modal.confirm("确认删除吗？").on(function(e){
             if(e){
                 $.post(url,function(data){
+                    alert("123");
+                    console.log("data:",data.message);
                     data = eval("(" + data + ")")
                     Modal.alert({msg: data.message}).on( function(e){
                         if(data.message == "删除成功"){
@@ -294,7 +316,7 @@
      */
     $(function() {
         $('#statistics').click(function() {
-            $('#td').css('display', 'block');
+            $('#countPage').css('display', 'block');
         })
     });
 
@@ -303,14 +325,6 @@
      * @returns {boolean}
      */
     function subForm() {
-        var startTime = $("#dateCreatedBegin").val();
-        var endTime = $("#dateCreatedEnd").val();
-        if (endTime < startTime) {
-            Modal.alert({
-                msg : '创建开始时间不能大于结束时间'
-            });
-            return false;
-        }
         $('#searchForm').submit();
     }
 </script>
