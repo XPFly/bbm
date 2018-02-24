@@ -43,7 +43,6 @@ public class UserServiceImpl implements UserService{
     @Override
     public void save(User user) {
         user.setUuid(UUID.randomUUID().toString().replace("-",""));
-        LOGGER.info("UUID:[{}]",UUID.randomUUID().toString());
         user.setCreateTime(new Date());
         userMapper.save(user);
     }
@@ -56,5 +55,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteByBatch(List<String> deleteIds) {
         userMapper.deleteByBatch(deleteIds);
+    }
+
+    @Override
+    public void updateByPrimaryKeySelective(User user) {
+        user.setUpdateTime(new Date());
+        userMapper.updateByPrimaryKeySelective(user);
     }
 }

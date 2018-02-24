@@ -54,4 +54,11 @@ public interface UserService {
      * @param deleteIds 需删除的记录的UUID的集合
      */
     void deleteByBatch(List<String> deleteIds);
+
+    /**
+     * 更新：更新单条记录
+     *
+     * @param user  User
+     */
+    void updateByPrimaryKeySelective(User user);
 }

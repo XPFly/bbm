@@ -14,6 +14,12 @@
 </head>
 <body class="no-skin ">
 <div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
     <div class="main-content ">
         <div class="main-content-inner ">
             <div class="page-content ">
@@ -30,96 +36,85 @@
                                 <div class="widget-main no-padding ">
                                     <div class="widget-main ">
                                         <form class="form-inline form-horizontal">
-                                            <div class="col-xs-12">
-                                                <div class="tabbable">
-                                                    <ul id="myTab4" class="nav nav-tabs padding-12 tab-color-blue background-blue">
-                                                        <li class="active"><a href="#home4" data-toggle="tab" aria-expanded="true">信息详情</a></li>
-                                                    </ul>
-                                                    <div class="tab-content ">
-                                                        <div class="tab-pane active no-padding" id="home4">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group form-group-sm width-300px">
-                                                                    <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">账号:</label>
-                                                                    <div class="col-sm-8  no-padding">
-                                                                        <label class="form-control label-small width-200px view-control"
-                                                                               data-placement="bottom" data-trigger="hover"
-                                                                               data-rel="popover">${user.account}</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group form-group-sm width-300px">
-                                                                    <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">昵称:</label>
-                                                                    <div class="col-sm-8  no-padding">
-                                                                        <label class="form-control label-small width-200px view-control"
-                                                                               data-placement="bottom" data-trigger="hover"
-                                                                               data-rel="popover">${user.nickName}</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group form-group-sm width-300px">
-                                                                    <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">性别:</label>
-                                                                    <div class="col-sm-8  no-padding">
-                                                                        <label class="form-control label-small width-200px view-control"
-                                                                               data-placement="bottom" data-trigger="hover"
-                                                                               data-rel="popover">
-                                                                            <c:if test="${user.gender==0}">男</c:if>
-                                                                            <c:if test="${user.gender==1}">女</c:if>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group form-group-sm width-300px">
-                                                                    <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">邮箱:</label>
-                                                                    <div class="col-sm-8  no-padding">
-                                                                        <label class="form-control label-small width-200px view-control"
-                                                                               data-placement="bottom" data-trigger="hover"
-                                                                               data-rel="popover">${user.mail}</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group form-group-sm width-300px">
-                                                                    <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">权限:</label>
-                                                                    <div class="col-sm-8  no-padding">
-                                                                        <label class="form-control label-small width-200px view-control"
-                                                                               data-placement="bottom" data-trigger="hover"
-                                                                               data-rel="popover">
-                                                                            <c:if test="${user.authority==0}">管理员</c:if>
-                                                                            <c:if test="${user.authority==1}">普通用户</c:if>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group form-group-sm width-300px">
-                                                                    <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">创建时间:</label>
-                                                                    <div class="col-sm-8  no-padding">
-                                                                        <label class="form-control label-small width-200px view-control"
-                                                                               data-placement="bottom" data-trigger="hover"
-                                                                               data-rel="popover">
-                                                                            <fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group form-group-sm width-300px">
-                                                                    <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">更新时间:</label>
-                                                                    <div class="col-sm-8  no-padding">
-                                                                        <label class="form-control label-small width-200px view-control"
-                                                                               data-placement="bottom" data-trigger="hover"
-                                                                               data-rel="popover">${user.updateTime}</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group form-group-sm width-300px">
-                                                                    <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">最近登录时间:</label>
-                                                                    <div class="col-sm-8  no-padding">
-                                                                        <label class="form-control label-small width-200px view-control"
-                                                                               data-placement="bottom" data-trigger="hover"
-                                                                               data-rel="popover">${user.lastLoginTime}</label>
-                                                                    </div>
-                                                                </div>
+                                            <div class="tabbable">
+                                                <ul id="myTab4" class="nav nav-tabs padding-12 tab-color-blue background-blue">
+                                                    <li class="active"><a href="#home4" data-toggle="tab" aria-expanded="true">信息详情</a></li>
+                                                </ul>
+                                                <div class="tab-content ">
+                                                    <div class="tab-pane active no-padding" id="home4">
+                                                        <div class="form-group form-group-sm width-300px">
+                                                            <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">账号:</label>
+                                                            <div class="col-sm-8  no-padding">
+                                                                <label class="form-control label-small width-200px view-control"
+                                                                       data-placement="bottom" data-trigger="hover"
+                                                                       data-rel="popover">${user.account}</label>
                                                             </div>
                                                         </div>
+                                                        <div class="form-group form-group-sm width-300px">
+                                                            <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">昵称:</label>
+                                                            <div class="col-sm-8  no-padding">
+                                                                <label class="form-control label-small width-200px view-control"
+                                                                       data-placement="bottom" data-trigger="hover"
+                                                                       data-rel="popover">${user.nickName}</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group form-group-sm width-300px">
+                                                            <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">性别:</label>
+                                                            <div class="col-sm-8  no-padding">
+                                                                <label class="form-control label-small width-200px view-control"
+                                                                       data-placement="bottom" data-trigger="hover"
+                                                                       data-rel="popover">
+                                                                    <c:if test="${user.gender==0}">男</c:if>
+                                                                    <c:if test="${user.gender==1}">女</c:if>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group form-group-sm width-300px">
+                                                            <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">邮箱:</label>
+                                                            <div class="col-sm-8  no-padding">
+                                                                <label class="form-control label-small width-200px view-control"
+                                                                       data-placement="bottom" data-trigger="hover"
+                                                                       data-rel="popover">${user.mail}</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group form-group-sm width-300px">
+                                                            <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">权限:</label>
+                                                            <div class="col-sm-8  no-padding">
+                                                                <label class="form-control label-small width-200px view-control"
+                                                                       data-placement="bottom" data-trigger="hover"
+                                                                       data-rel="popover">
+                                                                    <c:if test="${user.authority==0}">管理员</c:if>
+                                                                    <c:if test="${user.authority==1}">普通用户</c:if>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group form-group-sm width-300px">
+                                                            <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">创建时间:</label>
+                                                            <div class="col-sm-8  no-padding">
+                                                                <label class="form-control label-small width-200px view-control"
+                                                                       data-placement="bottom" data-trigger="hover"
+                                                                       data-rel="popover">
+                                                                    <fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group form-group-sm width-300px">
+                                                            <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">更新时间:</label>
+                                                            <div class="col-sm-8  no-padding">
+                                                                <label class="form-control label-small width-200px view-control"
+                                                                       data-placement="bottom" data-trigger="hover"
+                                                                       data-rel="popover">${user.updateTime}</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group form-group-sm width-300px">
+                                                                <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">最近登录时间:</label>
+                                                                <div class="col-sm-8  no-padding">
+                                                                    <label class="form-control label-small width-200px view-control"
+                                                                           data-placement="bottom" data-trigger="hover"
+                                                                           data-rel="popover">${user.lastLoginTime}</label>
+                                                                </div>
+                                                            </div>
                                                     </div>
-                                                </div>
-                                                <div style="text-align: center;">
-                                                    <button class="btn btn-info btn-sm" type="button"
-                                                            onclick="javascript:parent.$.fancybox.close();">
-															<span class="ace-icon fa fa-close icon-on-right bigger-110"></span>
-                                                        关闭
-                                                    </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -127,10 +122,22 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="operateRecord"></div>
+                        <div style="text-align: center;">
+                            <button class="btn btn-info btn-sm" type="button"
+                                    onclick="javascript:parent.$.fancybox.close();">
+                                <span class="ace-icon fa fa-close icon-on-right bigger-110"></span>
+                                关闭
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $("#operateRecord").load('${ctx}/bbm/operateRecord/list?foreignKey=${user.uuid}');
+</script>
 </body>
+</html>

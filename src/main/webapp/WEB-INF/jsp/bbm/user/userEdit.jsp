@@ -51,7 +51,7 @@
                             <div class="widget-body">
                                 <div class="widget-main no-padding ">
                                     <div class="widget-main ">
-                                        <form class="form-inline form-horizontal" >
+                                        <form id="form" class="form-inline form-horizontal" >
                                             <input type="hidden" name="uuid" value="${user.uuid}"/>
                                             <div class="col-xs-12">
                                                 <div class="tabbable">
@@ -65,7 +65,7 @@
                                                                     <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">账号:</label>
                                                                     <div class="col-sm-8  no-padding">
                                                                         <input class="form-control input-small width-200px view-control" name="account"
-                                                                               value="${user.account}" data-placement="bottom" data-trigger="hover" data-rel="popover" maxlength="15" onkeyup="value=value.replace(/[^\w\/]/ig,'')">
+                                                                               value="${user.account}" data-placement="bottom" data-trigger="hover" data-rel="popover" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group form-group-sm width-300px">
@@ -88,7 +88,7 @@
                                                                     <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">邮箱:</label>
                                                                     <div class="col-sm-8  no-padding">
                                                                         <input class="form-control input-small width-200px view-control" name="mail"
-                                                                               value="${user.mail}" data-placement="bottom" data-trigger="hover" data-rel="popover" maxlength="15" onkeyup="value=value.replace(/[^\w\/]/ig,'')">
+                                                                               value="${user.mail}" data-placement="bottom" data-trigger="hover" data-rel="popover" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group form-group-sm width-300px">
@@ -128,24 +128,17 @@
             </div>
         </div>
     </div>
-    <!-- /.main-content -->
 </div>
-<!-- /.main-container -->
-<%--<%@include file="../../layout/common.js.jsp"%>--%>
 <script type="text/javascript">
-    $("#btn-update").click(function(){
-        alert("123");
-
-        console.info("result:",$("form").serialize());
-
-        /*$.ajax({
-            url : "${ctx}/bbm/user/update/",
-            type : "POST",
-            data : $("form").serialize()+"&_method=PUT",
-            success : function(result){
-
+    $('#form').submit(function () {
+        $.ajax({
+            url:"${ctx}/bbm/user/update",
+            data:$('#form').serialize(),
+            success:function(result){
+                alert(result.description);
+                $("#close").click();
             }
-        });*/
+        });
     });
 </script>
 </body>

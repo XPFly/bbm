@@ -1,34 +1,29 @@
 package com.ecjtu.bbm.controller;
 
 import com.ecjtu.bbm.common.AbstractController;
+import com.ecjtu.bbm.common.ResultMessage;
+import com.ecjtu.bbm.common.constants.OperateRecordEnum;
 import com.ecjtu.bbm.common.utils.ExcelUtils;
 import com.ecjtu.bbm.common.utils.RequestHelper;
 import com.ecjtu.bbm.orm.domain.User;
+import com.ecjtu.bbm.service.impl.OperateRecordServiceImpl;
 import com.ecjtu.bbm.service.impl.UserServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @description:
@@ -45,6 +40,28 @@ public class UserController extends AbstractController {
     @Autowired
     private UserServiceImpl userServiceImpl;
 
+    @Autowired
+    private OperateRecordServiceImpl operateRecordServiceImpl;
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public String test(){
+
+        return toUp("");
+    }
+
+    public String toUp(String str){
+        Pattern reg = Pattern.compile("^[A-Z].*?]");
+        Matcher matcher = reg.matcher(str);
+        if (matcher.matches()){
+            return str;
+        }else {
+            char[] array = str.toCharArray();
+            array[0] = (char) (array[0]-32);
+            return String.valueOf(array);
+        }
+    }
+
     /**
      * 用户信息展示页面
      *
@@ -59,7 +76,7 @@ public class UserController extends AbstractController {
             model.addAttribute("userList","").addAttribute("user",user);
         }else {
             Integer count = userServiceImpl.count(user);
-            PageHelper.startPage(RequestHelper.getParamValue("pageNum",PAGE_NUM,request),RequestHelper.getParamValue("pageSize",PAGE_SIZE,request));
+            PageHelper.startPage(RequestHelper.getParamValueOfInt("pageNum",PAGE_NUM,request),RequestHelper.getParamValueOfInt("pageSize",PAGE_SIZE,request));
             List<User> userList = userServiceImpl.findList(user);
             PageInfo<User> pageInfo = new PageInfo<>(userList,5);
             model.addAttribute("userList", userList).addAttribute("pageInfo", pageInfo).addAttribute("user", user).addAttribute("count", count);
@@ -83,10 +100,14 @@ public class UserController extends AbstractController {
      *
      * @param user  User
      */
-    @RequestMapping(value = "/save")
-    public void save (User user){
-        LOGGER.info("==保存用户信息==>");
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultMessage save (User user){
+        LOGGER.info("保存用户信息：[{}]",user.toString());
         userServiceImpl.save(user);
+        return ResultMessage.success();
+        // 保存操作记录
+//        operateRecordServiceImpl.insertRecord(user,user.getUuid(), OperateRecordEnum.INSERT,OperateRecordEnum.USER);
     }
 
     /**
@@ -111,27 +132,43 @@ public class UserController extends AbstractController {
      * @param model     Model
      * @return          String
      */
-    @RequestMapping("edit")
+    @RequestMapping("/edit")
     public String edit(HttpServletRequest request, Model model){
         User user = userServiceImpl.findOne(request.getParameter("uuid"));
         model.addAttribute("user",user);
         return "bbm/user/userEdit";
     }
 
-    @RequestMapping("update")
-    public void update(){
-
+    @RequestMapping("/update")
+    @ResponseBody
+    public ResultMessage update(User user){
+        userServiceImpl.updateByPrimaryKeySelective(user);
+        return ResultMessage.success();
     }
 
     /**
-     * 删除单个用户
+     * 删除用户
      *
-     * @param uuid  UUID
+     * @param ids   UUID（集合）
      */
-    @RequestMapping(value = "/delete")
-    public void delete(@RequestParam("uuid") String uuid,Model model){
-        userServiceImpl.delete(uuid);
-        model.addAttribute("message","删除成功");
+    @RequestMapping(value = "/delete/{ids}")
+    @ResponseBody
+    public ResultMessage delete(@PathVariable("ids") String ids){
+        if (!StringUtils.isEmpty(ids)){
+            LOGGER.info("删除用户的uuid：[{}]",ids);
+            if (ids.contains("-")){
+                ArrayList<String> idList = new ArrayList<>();
+                String[] idArr = ids.split("-");
+                for (String uuid : idArr){
+                    idList.add(uuid);
+                }
+                userServiceImpl.deleteByBatch(idList);
+            }else {
+                userServiceImpl.delete(ids);
+            }
+            return ResultMessage.success();
+        }
+        return ResultMessage.fail().add("error","操作方式有误");
     }
 
     /**

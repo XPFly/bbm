@@ -9,15 +9,21 @@ public enum OperateRecordEnum {
     /**
      * 操作类型
      */
-    INSERT("00", "新增"), DELETE("01", "删除"), QUERY("02", "查询"), UPADATE("03", "更新"),
+    INSERT("00", "新增"), DELETE("01", "删除"), QUERY("02", "查询"), UPDATE("03", "更新"),
     /**
      * 操作内容
      */
+    USER("用户")
 
     ;
 
     private String code;
     private String value;
+    private String contentValue;
+
+    OperateRecordEnum(String contentValue) {
+        this.contentValue = contentValue;
+    }
 
     OperateRecordEnum(String code, String value) {
         this.code = code;
@@ -30,5 +36,9 @@ public enum OperateRecordEnum {
 
     public String getValue() {
         return value;
+    }
+
+    public String getContentValue() {
+        return contentValue;
     }
 }

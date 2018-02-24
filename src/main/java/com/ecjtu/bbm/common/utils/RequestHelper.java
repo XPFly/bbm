@@ -10,15 +10,21 @@ import javax.servlet.http.HttpServletRequest;
  * @date: 2018/2/6
  */
 public final class RequestHelper {
+
     private static final ThreadLocal<HttpServletRequest> REQUEST = new ThreadLocal();
 
-    public static int getInt(String key, int defaultValue) {
-        String str = ((HttpServletRequest)REQUEST.get()).getParameter(key);
-        return StringUtils.isEmpty(str) ? defaultValue : Integer.parseInt(str);
-    }
-
-    public static int getParamValue(String key,int defaultValue,HttpServletRequest request){
+    public static int getParamValueOfInt(String key,int defaultValue,HttpServletRequest request){
         String paramValue = request.getParameter(key);
         return StringUtils.isEmpty(paramValue) ? defaultValue : Integer.parseInt(paramValue);
+    }
+
+    public static String getParamValueOfString(String key,HttpServletRequest request){
+        getParamValueOfString(key,"",request);
+        return null;
+    }
+
+    public static String getParamValueOfString(String key,String defaultValue,HttpServletRequest request){
+        String paramValue = request.getParameter(key);
+        return StringUtils.isEmpty(paramValue) ? defaultValue : paramValue.trim();
     }
 }

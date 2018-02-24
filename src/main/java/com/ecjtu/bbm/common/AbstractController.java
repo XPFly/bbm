@@ -8,5 +8,5 @@ package com.ecjtu.bbm.common;
 public class AbstractController {
     public final static int PAGE_NUM = 1;
 
-    public final static int PAGE_SIZE = 10;
+    public final static int PAGE_SIZE = 5;
 }

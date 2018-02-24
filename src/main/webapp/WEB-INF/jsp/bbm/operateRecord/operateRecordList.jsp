@@ -17,6 +17,10 @@
             <i class="ace-icon fa fa-table"></i> 操作记录
         </h5>
     </div>
+    <c:if test="${empty operateRecordList}">
+        <div align="center">无任何操作记录</div>
+    </c:if>
+    <c:if test="${!empty operateRecordList}">
     <div class="widget-body">
         <div class="widget-main no-padding table-responsive">
             <table class="table  table-condensed table-striped table-bordered table-hover dataTable no-footer DTTT_selectable">
@@ -46,6 +50,7 @@
             </table>
         </div>
     </div>
+    </c:if>
 </div>
 </body>
 </html>

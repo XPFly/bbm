@@ -21,8 +21,7 @@
     <script type="text/javascript" src="${ctx}/static/js/fancy/helpers/jquery.fancybox-thumbs.js"></script>
     <script type="text/javascript" src="${ctx}/static/js/fancy/helpers/jquery.fancybox-media.js"></script>
 </head>
-<body>
-    <body class="no-skin ">
+<body class="no-skin ">
 <div class="main-container" id="main-container">
     <div class="main-content ">
         <div class="main-content-inner ">
@@ -52,31 +51,47 @@
                                                                 <div class="form-group form-group-sm width-300px">
                                                                     <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">账号:</label>
                                                                     <div class="col-sm-8  no-padding">
-                                                                        <input class="form-control input-small width-200px view-control" name="name"
+                                                                        <input class="form-control input-small width-200px view-control" name="account"
                                                                                value="${user.account}" data-placement="bottom" data-trigger="hover" data-rel="popover">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group form-group-sm width-300px">
                                                                     <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">昵称:</label>
                                                                     <div class="col-sm-8  no-padding">
-                                                                        <input class="form-control input-small width-200px view-control" name="age"
+                                                                        <input class="form-control input-small width-200px view-control" name="nickName"
                                                                                value="${user.nickName}" data-placement="bottom" data-trigger="hover" data-rel="popover">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group form-group-sm width-300px">
                                                                     <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">性别:</label>
                                                                     <div class="col-sm-8  no-padding">
-                                                                        <select data-placeholder="请选择" name="gender" class="form-control width-200px">
-                                                                            <option value="0">男</option>
-                                                                            <option value="1">女</option>
-                                                                        </select>
+                                                                        <input type="radio" value="0" name="gender" checked="checked" />
+                                                                        <span class="lbl">&nbsp;男</span>
+                                                                        <input type="radio" value="1" <c:if test="${user.gender=='1'}">checked="checked" </c:if> name="gender" />
+                                                                        <span class="lbl">&nbsp;女</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group form-group-sm width-300px">
+                                                                    <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">头像:</label>
+                                                                    <div class="col-sm-8  no-padding">
+                                                                        <input class="form-control input-small width-200px view-control" name="icon"
+                                                                               value="${user.icon}" data-placement="bottom" data-trigger="hover" data-rel="popover">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group form-group-sm width-300px">
                                                                     <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">邮箱:</label>
                                                                     <div class="col-sm-8  no-padding">
-                                                                        <input class="form-control input-small width-200px view-control" name="email"
+                                                                        <input class="form-control input-small width-200px view-control" name="mail"
                                                                                value="${user.mail}" data-placement="bottom" data-trigger="hover" data-rel="popover">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group form-group-sm width-300px">
+                                                                    <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">权限:</label>
+                                                                    <div class="col-sm-8  no-padding">
+                                                                        <select data-placeholder="请选择" name="authority" class="form-control width-200px">
+                                                                            <option value="0">管理员</option>
+                                                                            <option value="1">普通用户</option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -86,7 +101,7 @@
                                             </div>
 
                                             <div style="text-align: center;">
-                                                <button class="btn btn-info btn-sm" type="submit">
+                                                <button id="save_btn" class="btn btn-info btn-sm" type="submit">
                                                     <span class="ace-icon fa fa-save icon-on-right bigger-110"></span>
                                                     保存
                                                 </button>
@@ -106,45 +121,19 @@
             </div>
         </div>
     </div>
-    <!-- /.main-content -->
-
 </div>
-<!-- /.main-container -->
-<%--<%@include file="../../layout/common.js.jsp"%>--%>
 <script type="text/javascript">
-    $('.chosen-select').chosen({});
-    $('#form').formValidation({
-        message : 'This value is not valid',
-        container : 'popover',
-        feedbackIcons : {
-            valid : 'glyphicon glyphicon-ok',
-            invalid : 'glyphicon glyphicon-remove',
-            validating : 'glyphicon glyphicon-refresh'
-        },
-
-    }).on('success.form.fv', function(e) {
-        e.preventDefault();
-        var $form = $(e.target);
-        var url='${ctx}/bbm/user/save';
-        $.post(url,$form.serialize(),function(data){
-            data = eval("(" + data + ")");
-            Modal.alert({msg: data.message}).on( function(e){
-                if('1'== data.result){
-                    $("#close").click();
-                }
-            });
-        });
-        /*$.ajax({
-            url:"${ctx}/bbm/user/save/",
-            type:"DELETE",
-            data:$form.serialize(),
+    $('#form').submit(function () {
+        $.ajax({
+            url:"${ctx}/bbm/user/save",
+            type:"POST",
+            data:$('#form').serialize(),
             success:function(result){
-                alert(result.msg);
+                alert(result.description);
                 $("#close").click();
             }
-        });*/
+        });
     });
 </script>
-</body>
 </body>
 </html>

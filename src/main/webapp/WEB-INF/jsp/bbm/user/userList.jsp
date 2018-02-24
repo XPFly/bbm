@@ -22,9 +22,6 @@
 
 </head>
 <body class="no-skin ">
-===========<br>
-${pageInfo}<br>
------------
 <div class="main-container" id="main-container">
     <div class="main-content ">
         <div class="main-content-inner ">
@@ -191,7 +188,7 @@ ${pageInfo}<br>
                                                             查看</a>
                                                         <a href="javascript:show('edit','${user.uuid }')" >
                                                             修改</a>
-                                                        <a href="javascript:del('${user.uuid }')" >
+                                                        <a href="javascript:del('${user.uuid }','${user.nickName}')" >
                                                             删除</a>
                                                     </td>
                                                 </tr>
@@ -244,7 +241,7 @@ ${pageInfo}<br>
         var del_idstr = "";
         $.each($(".checkItem:checked"),function(){
             //组装员工姓名字符串
-            userNames += $(this).parents("tr").find("td:eq(2)").text()+",";
+            userNames += $(this).parents("tr").find("td:eq(3)").text()+",";
             //组装员工id字符串
             del_idstr += $(this).parents("tr").find("#uuid").val()+"-";
         });
@@ -252,35 +249,38 @@ ${pageInfo}<br>
         userNames = userNames.substring(0, userNames.length-1);
         //去除删除的id多余的：短横线(-)
         del_idstr = del_idstr.substring(0, del_idstr.length-1);
-        if(confirm("确认删除【"+userNames+"】吗？")){
+        if(confirm("确认删除【"+userNames+"】吗?")){
             //发送ajax请求删除
             $.ajax({
                 url:"${ctx}/bbm/user/delete/"+del_idstr,
                 type:"DELETE",
-                success:function(result){
-                    alert(result.msg);
-                    $("#searchForm").submit();
+                success:function(data){
+                    if ("200" === data.code){
+                        alert(data.description);
+                        $("#searchForm").submit();
+                    }else {
+                        alert(data.error);
+                    }
                 }
             });
         }
     });
 
-    function del(uuid){
-        var url="${ctx}/bbm/user/delete?uuid="+uuid;
-        Modal.confirm("确认删除吗？").on(function(e){
-            if(e){
-                $.post(url,function(data){
-                    alert("123");
-                    console.log("data:",data.message);
-                    data = eval("(" + data + ")")
-                    Modal.alert({msg: data.message}).on( function(e){
-                        if(data.message == "删除成功"){
-                            $("#searchForm").submit();
-                        }
-                    });
-                });
-            }
-        });
+    function del(uuid,nickName){
+        if(confirm("确认删除【"+nickName+"】吗?")){
+            $.ajax({
+                url:"${ctx}/bbm/user/delete/"+uuid,
+                type:"DELETE",
+                success:function(data){
+                    if ("200" === data.code){
+                        alert(data.description);
+                        $("#searchForm").submit();
+                    }else {
+                        alert(data.error);
+                    }
+                }
+            });
+        }
     }
 
     /**

@@ -101,10 +101,10 @@
     
    str='<div class="inline">';
    str+='<select id="_pSize"  class=" form-control " style="width:65px ;height:30px" onchange="onChange4PageSize(this)">';
-   str+='<option  >10</option>';
-   str+='<option  >20</option>';
-   str+='<option  >50</option>';
-   str+='<option  >100</option>';
+   str+='<option>10</option>';
+   str+='<option>20</option>';
+   str+='<option>50</option>';
+   str+='<option>100</option>';
    str+='</select>';
    str+='</div>';
     if(pages > 0)
