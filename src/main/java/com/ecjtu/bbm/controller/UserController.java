@@ -22,8 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @description:
@@ -42,25 +40,6 @@ public class UserController extends AbstractController {
 
     @Autowired
     private OperateRecordServiceImpl operateRecordServiceImpl;
-
-    @RequestMapping("/test")
-    @ResponseBody
-    public String test(){
-
-        return toUp("");
-    }
-
-    public String toUp(String str){
-        Pattern reg = Pattern.compile("^[A-Z].*?]");
-        Matcher matcher = reg.matcher(str);
-        if (matcher.matches()){
-            return str;
-        }else {
-            char[] array = str.toCharArray();
-            array[0] = (char) (array[0]-32);
-            return String.valueOf(array);
-        }
-    }
 
     /**
      * 用户信息展示页面
@@ -105,9 +84,9 @@ public class UserController extends AbstractController {
     public ResultMessage save (User user){
         LOGGER.info("保存用户信息：[{}]",user.toString());
         userServiceImpl.save(user);
-        return ResultMessage.success();
         // 保存操作记录
-//        operateRecordServiceImpl.insertRecord(user,user.getUuid(), OperateRecordEnum.INSERT,OperateRecordEnum.USER);
+        //operateRecordServiceImpl.insertRecord(user,user.getUuid(), OperateRecordEnum.INSERT,OperateRecordEnum.USER);
+        return ResultMessage.success();
     }
 
     /**
