@@ -78,9 +78,9 @@
                                                                 <div class="form-group form-group-sm width-300px">
                                                                     <label class="col-sm-4 control-label widget-color-normal5 width-100px no-padding-left">性别:</label>
                                                                     <div class="col-sm-8  no-padding">
-                                                                        <input type="radio" value="0" name="gender" checked="checked" />
+                                                                        <input type="radio" value="0" name="gender" <c:if test="${user.gender=='0'}">checked="checked" </c:if> />
                                                                             <span class="lbl">&nbsp;男</span>
-                                                                        <input type="radio" value="1" <c:if test="${user.gender=='1'}">checked="checked" </c:if> name="gender" />
+                                                                        <input type="radio" value="1" name="gender" <c:if test="${user.gender=='1'}">checked="checked" </c:if> />
                                                                             <span class="lbl">&nbsp;女</span>
                                                                     </div>
                                                                 </div>

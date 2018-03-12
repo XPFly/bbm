@@ -101,7 +101,7 @@
                                             </div>
 
                                             <div style="text-align: center;">
-                                                <button id="save_btn" class="btn btn-info btn-sm" type="submit">
+                                                <button class="btn btn-info btn-sm" type="submit">
                                                     <span class="ace-icon fa fa-save icon-on-right bigger-110"></span>
                                                     保存
                                                 </button>

@@ -30,7 +30,7 @@
     </sql>
 
     <!--查询：查询所有符合条件的记录-->
-    <select id="findList" parameterType="com.ecjtu.bbm.orm.domain.User" resultMap="result">
+    <select id="findList" resultMap="result" parameterType="com.ecjtu.bbm.orm.domain.User">
         SELECT
             <include refid="columns"/>
         FROM
@@ -47,6 +47,13 @@
             T_BBM_USER_INFO
         WHERE
             UUID = #{uuid}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer" parameterType="com.ecjtu.bbm.orm.domain.User">
+        SELECT
+            COUNT(1)
+        FROM T_BBM_USER_INFO
+        <include refid="dynamicWhere"/>
     </select>
 
     <insert id="save" parameterType="com.ecjtu.bbm.orm.domain.User">
@@ -85,8 +92,6 @@
             <if test="operator != null">
                 OPERATOR,
             </if>
-
-
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
@@ -94,9 +99,6 @@
             </if>
             <if test="account != null">
                 #{account,jdbcType=VARCHAR},
-            </if>
-            <if test="nickName != null">
-                #{nickName,jdbcType=VARCHAR},
             </if>
             <if test="nickName != null">
                 #{nickName,jdbcType=VARCHAR},
@@ -114,13 +116,13 @@
                 #{authority,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
-                #{createTime,jdbcType=java.sql.Timestamp},
+                #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime != null">
-                #{updateTime,jdbcType=java.sql.Timestamp},
+                #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="lastLoginTime != null">
-                #{lastLoginTime,jdbcType=java.sql.Timestamp},
+                #{lastLoginTime,jdbcType=TIMESTAMP},
             </if>
             <if test="operator != null">
                 #{operator,jdbcType=VARCHAR},
@@ -131,6 +133,7 @@
     <!--删除：删除单条记录-->
     <delete id="delete" parameterType="String" >
         DELETE
+        FROM
             T_BBM_USER_INFO
         WHERE
             UUID = #{uuid}
@@ -138,10 +141,29 @@
 
     <!--删除：批量删除-->
     <delete id="deleteByBatch">
-        DELETE FROM T_BBM_USER_INFO UUID IN
-        <foreach collection="list" item="deleteIds" open="(" separator="," close=")">
+        DELETE FROM T_BBM_USER_INFO
+        WHERE UUID IN
+        <foreach collection="list" item="deleteIds" open="(" separator="," close=")" >
             #{deleteIds}
         </foreach>
     </delete>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.bbm.orm.domain.User">
+        UPDATE T_BBM_USER_INFO
+        <set>
+            <if test="@Ognl@isNotEmpty(uuid)"> UUID=#{uuid}, </if>
+            <if test="@Ognl@isNotEmpty(account)"> ACCOUNT=#{account}, </if>
+            <if test="@Ognl@isNotEmpty(nickName)"> NICKNAME=#{nickName}, </if>
+            <if test="@Ognl@isNotEmpty(icon)"> ICON=#{icon}, </if>
+            <if test="@Ognl@isNotEmpty(gender)"> GENDER=#{gender}, </if>
+            <if test="@Ognl@isNotEmpty(mail)"> MAIL=#{mail}, </if>
+            <if test="@Ognl@isNotEmpty(authority)"> AUTHORITY=#{authority}, </if>
+            <if test="@Ognl@isNotEmpty(createTime)"> CREATE_TIME=#{createTime}, </if>
+            <if test="@Ognl@isNotEmpty(updateTime)"> UPDATE_TIME=#{updateTime}, </if>
+            <if test="@Ognl@isNotEmpty(lastLoginTime)"> LAST_LOGIN_TIME=#{lastLoginTime}, </if>
+            <if test="@Ognl@isNotEmpty(operator)"> OPERATOR=#{operator}, </if>
+        </set>
+        WHERE UUID = #{uuid}
+    </update>
 
 </mapper>
