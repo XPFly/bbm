@@ -61,8 +61,4 @@ dependencies {
     compile 'org.apache.poi:poi-ooxml-schemas:3.10-FINAL'
     compile 'org.apache.poi:poi-excelant:3.10-FINAL'
     compile 'org.apache.poi:poi-scratchpad:3.10-FINAL'
-
-    // mail
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.5.9.RELEASE'
-    compile group: 'com.sun.mail', name: 'javax.mail', version: '1.5.4'
 }

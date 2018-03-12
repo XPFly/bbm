@@ -30,58 +30,9 @@
         <include refid="columns"/>
         FROM T_BBM_OPERATE_RECORD
         WHERE
-        FOREIGN_KEY = #{foreignKey}
+        CONTENT_NO = #{contentNo}
         ORDER BY OPERATE_TIME DESC
     </select>
 
-    <insert id="insert" parameterType="com.ecjtu.bbm.orm.domain.OperateRecord" >
-        insert into T_BBM_OPERATE_RECORD
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="@Ognl@isNotEmpty(uuid)">
-                UUID,
-            </if>
-            <if test="@Ognl@isNotEmpty(foreignKey)">
-                FOREIGN_KEY,
-            </if>
-            <if test="@Ognl@isNotEmpty(operator)">
-                OPERATOR,
-            </if>
-            <if test="@Ognl@isNotEmpty(operateType)">
-                OPERATE_TYPE,
-            </if>
-            <if test="@Ognl@isNotEmpty(contentNo)">
-                CONTENT_NO,
-            </if>
-            <if test="@Ognl@isNotEmpty(remark)">
-                REMARK,
-            </if>
-            <if test="@Ognl@isNotEmpty(operateTime)">
-                OPERATE_TIME,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="@Ognl@isNotEmpty(uuid)">
-                #{uuid},
-            </if>
-            <if test="@Ognl@isNotEmpty(foreignKey)">
-                #{foreignKey},
-            </if>
-            <if test="@Ognl@isNotEmpty(operator)">
-                #{operator},
-            </if>
-            <if test="@Ognl@isNotEmpty(operateType)">
-                #{operateType},
-            </if>
-            <if test="@Ognl@isNotEmpty(contentNo)">
-                #{contentNo},
-            </if>
-            <if test="@Ognl@isNotEmpty(remark)">
-                #{remark},
-            </if>
-            <if test="@Ognl@isNotEmpty(operateTime)">
-                #{operateTime},
-            </if>
-        </trim>
-    </insert>
 
 </mapper>

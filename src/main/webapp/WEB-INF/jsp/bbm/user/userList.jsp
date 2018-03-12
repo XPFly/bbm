@@ -297,7 +297,6 @@
             height: 800,
             autoSize: false,
             closeClick: false,
-            index:1000,
             afterClose:function(){
                 location.reload();
             }

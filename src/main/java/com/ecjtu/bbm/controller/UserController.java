@@ -3,10 +3,7 @@ package com.ecjtu.bbm.controller;
 import com.ecjtu.bbm.common.AbstractController;
 import com.ecjtu.bbm.common.ResultMessage;
 import com.ecjtu.bbm.common.constants.OperateRecordEnum;
-import com.ecjtu.bbm.common.orm.domain.MailInfo;
-import com.ecjtu.bbm.common.orm.po.MailInfoPo;
 import com.ecjtu.bbm.common.utils.ExcelUtils;
-import com.ecjtu.bbm.common.utils.MailUtils;
 import com.ecjtu.bbm.common.utils.RequestHelper;
 import com.ecjtu.bbm.orm.domain.User;
 import com.ecjtu.bbm.service.impl.OperateRecordServiceImpl;
@@ -16,8 +13,6 @@ import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -45,21 +40,6 @@ public class UserController extends AbstractController {
 
     @Autowired
     private OperateRecordServiceImpl operateRecordServiceImpl;
-
-    @RequestMapping("/test")
-    public String test(){
-
-        return "/bbm/article/articleAdd";
-    }
-
-    @RequestMapping(value = "/demo",method = RequestMethod.POST)
-    @ResponseBody
-    public String demo(HttpServletRequest request){
-        LOGGER.info("开始：获取内容====");
-        String content = request.getParameter("content");
-        LOGGER.info("获取内容【{}】",content);
-        return content;
-    }
 
     /**
      * 用户信息展示页面
@@ -90,7 +70,6 @@ public class UserController extends AbstractController {
      */
     @RequestMapping(value = "/add")
     public String add(Model model,User user){
-        LOGGER.info("跳转到添加页面");
         model.addAttribute("user",user);
         return "bbm/user/userAdd";
     }
